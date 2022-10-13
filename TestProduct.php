@@ -13,23 +13,30 @@
 		protected function setUp():void{
 			$this->ProductTestInstance=new Product($this->productTitle,$this->price,$this->quantity);
 		}
-
-		/**
-		* @dataprovider itemsProvider
-		*/
-			
-		public function testAddItems(){
-			$this->ProductTestInstance->addItems($this->addItems);
-			$this->assertEquals(($this->quantity+$this->addItems), $this->ProductTestInstance->getQuantity());
+		
+		protected function tearDown():void{
+			$this->ProductTestInstance=null;
 		}
 		
-		public function itemsProvider(){
-			return [1, 2, 3];
-		}
 		
-
 		public function testQuantity(){
 			$this->assertEquals($this->quantity, $this->ProductTestInstance->getQuantity());
+		}
+
+		/**
+		* @dataProvider itemsProvider
+		*/
+		
+		public function testAddItems($items){
+			$this->ProductTestInstance->addItems($items);
+			$this->assertEquals(($this->quantity+$items), $this->ProductTestInstance->getQuantity());
+
+		}
+		
+		
+		
+		public function itemsProvider(){
+			return [[1],[2],[3]];
 		}
 
 	}
