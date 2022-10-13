@@ -33,7 +33,8 @@
 		}
 		
 		public function delItems(int $quantity){
-			$this->quantity-=$quantity;
+			if ($this->quantity-$quantity>=0)
+				$this->quantity-=$quantity;
 		}
 		
 		public function getQuantity(){

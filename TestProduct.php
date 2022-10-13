@@ -13,13 +13,18 @@
 		protected function setUp():void{
 			$this->ProductTestInstance=new Product($this->productTitle,$this->price,$this->quantity);
 		}
-		
-		
 
+		/**
+		* @dataprovider itemsProvider
+		*/
 			
 		public function testAddItems(){
 			$this->ProductTestInstance->addItems($this->addItems);
 			$this->assertEquals(($this->quantity+$this->addItems), $this->ProductTestInstance->getQuantity());
+		}
+		
+		public function itemsProvider(){
+			return [1, 2, 3];
 		}
 		
 
